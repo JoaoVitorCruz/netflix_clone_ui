@@ -19,7 +19,7 @@ let homeList = {
         return [{
                 slug: 'trending',
                 title: 'Recomendados para você',
-                items: await basicFetch(`discover/tv?language=pt-BR&api_key=${API_KEY}`)
+                items: await basicFetch(`discover/tv?language=pt-BR&api_key=${API_KEY}&with_network=213`)
             },
 
             {

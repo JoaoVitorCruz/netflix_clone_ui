@@ -1,0 +1,25 @@
+.header--logo, .header--user {
+    height: 40px;
+}
+
+.header--user img, .header--logo img {
+    padding: 0 30px;
+    height: 100%;
+}
+
+header {
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all ease .7s;
+}
+
+header.black {
+    background: #111;
+} 

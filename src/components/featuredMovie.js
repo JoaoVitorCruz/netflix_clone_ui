@@ -3,13 +3,18 @@ import './featuredMovie.css';
 
 let featuredMovie = ({item}) =>{
     let data = new Date(item.first_air_date)
-    console.log(item)
 
     let genreList = []
     
     item.genres.map((val)=>{
         genreList.push(val.name)
     })
+
+    let description = item.overview
+
+    if(description.length > 200) {
+        description = description.substring(0,200)+'...'
+    }
 
     return (
         <section className="featured" style={{
@@ -24,7 +29,7 @@ let featuredMovie = ({item}) =>{
                         <div className="featured--points">Nota: {item.vote_average}</div>
                         <div className="featured--year">{data.getFullYear()}</div>
                         <div className="featured--seasons">{item.number_of_seasons} temporada{item.number_of_seasons != 1 ? 's': ''}</div>
-                        <div className="featured--description">{item.overview}</div>
+                        <div className="featured--description">{description}</div>
                         <div className="buttons">
                             <a href={`/watch/${item.id}`} className="featured--watchButton">► Assistir</a>
                             <a href={`/list/add/${item.id}`} className="featured--listButton">+ Minha lista</a>

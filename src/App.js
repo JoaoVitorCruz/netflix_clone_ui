@@ -12,7 +12,8 @@ function rand(min, max) {
 function App() {
   const [movieList, setMovieList] = useState([])
   const [featuredData, setFeaturedData] = useState(null)
-  
+  const [blackHeader,setBlackHeader] = useState(false)
+
   useEffect(()=>{
     const loadAll = async () => {
       let list = await Tmdb.getHomeList();
@@ -27,9 +28,27 @@ function App() {
     loadAll()
   },[])
 
+  useEffect(()=>{
+    //const height = window.innerHeight
+    window.addEventListener('scroll', ()=>{
+      if((40) <= window.pageYOffset) {
+        setBlackHeader(true)
+      } else {
+        setBlackHeader(false)
+      }
+    })
+
+  },[])
+
   return (
     <div className="page">
-      <Header/>
+      <Header black = {blackHeader}/>
+
+
+      <div className={movieList.length?'disabled':'loading'}>
+        <img src="https://i.pinimg.com/originals/28/47/2d/28472d243bc5b02178de348812e0792e.gif" alt="Carregando...."/>
+      </div>
+
 
       {
         (featuredData && 
@@ -45,7 +64,16 @@ function App() {
               )
             })
           }
-      </section>           
+      </section>         
+
+      <footer>
+          <div className="footer--tmdbLink">
+            Dados fornecidos pela <a href='https://www.themoviedb.org/'>TMBD</a>
+          </div>
+          <div className="footer--netflixLink">
+            direitos de imagem: <a href='https://www.themoviedb.org/'>Netflix</a>
+          </div>
+      </footer>
     </div>
   );
 }
